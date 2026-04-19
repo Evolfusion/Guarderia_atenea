@@ -1,0 +1,42 @@
+:root {
+  /* *Colors */
+  --main-background:#F1FDF5;
+  --color-primary: #00A63E;
+  --color-secondary:#016630;
+  --color-text: #ffff;
+  /* *Typography */
+  --text-typography:"Montserrat", sans-serif;
+  
+    /* *Movil */
+    --main-margin: 1rem 1rem;
+    --main-padding: 1rem 1rem;
+    --container-margin: 1rem 0rem;
+    --container-padding: 1rem 0;
+    --title-size: 1.50rem;
+    --subtitle-size: 1.25rem;
+    --description-size: 1rem;
+
+    /* *Netbook */
+    --netbook-margin: 0 2.25rem;
+    --netbook-padding: 0 2.25rem;
+    --netbook-container: 1.25rem 0;
+    --netbook-title: 2rem;
+    --netbook-subtitle: 1.5rem;
+    --netbook-description: 1.2rem;
+
+    /* *Desktop */
+    --desktop-container: 1.5rem 0;
+    --desktop-title: 3rem;
+    --desktop-subtitle: 2rem;
+    --desktop-description: 1.5rem;
+  
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+h1,h2,h3, p ,a {
+  font-family: var(--text-typography);
+}
