@@ -1,9 +1,11 @@
 :root {
   /* *Colors */
   --main-background:#F1FDF5;
+  --header-background: #ffffff;
   --color-primary: #00A63E;
   --color-secondary:#016630;
   --color-text: #ffff;
+  --color-text-secondary: #000000;
   /* *Typography */
   --text-typography:"Montserrat", sans-serif;
   
@@ -39,4 +41,11 @@
 }
 h1,h2,h3, p ,a {
   font-family: var(--text-typography);
+}
+main{
+   background-color: var(--main-background);
+}
+.daycare{
+  padding: var(--main-padding);
+  margin: var(--main-margin);
 }

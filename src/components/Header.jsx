@@ -14,7 +14,7 @@ export default function Header(){
                     </Link>
                 </div>
 
-                <ul className={`header__menu ${isOpen ? "show-menu" : ""}`}>
+                <ul className={`header__menu ${isOpen ? "header__menu--show" : ""}`}>
                     <li><Link to="/" className="header__menu-link" onClick={toggleMenu}><Dog />Guardería</Link></li>
                     <li><Link to="/walks" className="header__menu-link" onClick={toggleMenu}><Footprints />Paseos</Link></li>
                     <li><Link to="/reservations" className="header__menu-link" onClick={toggleMenu}><Calendar />Reservas</Link></li>
