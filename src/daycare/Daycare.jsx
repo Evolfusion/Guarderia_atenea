@@ -1,141 +1,63 @@
 import './Daycare.css';
-import { gallery as imagenes } from '../data/daycareData.js';
+
+import {
+  gallery as imagenes
+} from '../data/daycareData.js';
+
+import {
+  useUploadFile
+} from "../daycare/hooks/useUploadFile";
+
+import {
+  useSubmitForm
+} from "../daycare/hooks/useSubmitForm";
+
+import {
+  buildDaycareData
+} from "../daycare/utils/buildDaycareData";
 
 export default function Daycare() {
+
+  const { uploadFile } =
+    useUploadFile();
+
+  const { submitForm } =
+    useSubmitForm();
   // Función para manejar el envío del formulario
+
   const handleSubmit = async (e) => {
 
     e.preventDefault();
 
     try {
 
-      // Obtener datos del formulario
-      const formData = new FormData(e.target);
+      const formData =
+        new FormData(e.target);
 
-      // Obtener archivo
-      const file = formData.get("petVaccination");
+      const petVaccinationFile =
+        formData.get("petVaccination");
 
-      // Datos para Cloudinary
-      const cloudinaryData = new FormData();
+      const petVaccinationUrl =
+        await uploadFile(
+          petVaccinationFile
+        );
 
-      cloudinaryData.append("file", file);
-
-      cloudinaryData.append(
-        "upload_preset",
-        "guarderia_atenea"
-      );
-
-      // Subir archivo a Cloudinary
-      const cloudinaryResponse = await fetch(
-        "https://api.cloudinary.com/v1_1/dxkdlvkdq/auto/upload",
-        {
-          method: "POST",
-          body: cloudinaryData,
-        }
-      );
-
-      const cloudinaryResult =
-        await cloudinaryResponse.json();
-
-      console.log(cloudinaryResult);
-
-      // URL del archivo subido
-      const fileUrl =
-        cloudinaryResult.secure_url;
-
-      console.log(fileUrl);
-
-      // Crear objeto con todos los datos
-      const dataToSend = {
-
-        ownerName:
-          formData.get("ownerName"),
-
-        phone:
-          formData.get("phone"),
-
-        secondaryPhone:
-          formData.get("secondaryPhone"),
-
-        address:
-          formData.get("address"),
-
-        idDocument:
-          formData.get("idDocument"),
-
-        petName:
-          formData.get("petName"),
-
-        petBreed:
-          formData.get("petBreed"),
-
-        veterinarianInfo:
-          formData.get("veterinarianInfo"),
-
-        petBehavior:
-          formData.get("petBehavior"),
-
-        petGender:
-          formData.get("petGender"),
-
-        petSpayed:
-          formData.get("petSpayed"),
-
-        petSpecialNeeds:
-          formData.get("petSpecialNeeds"),
-
-        descriptionSpecialNeeds:
-          formData.get("descriptionSpecialNeeds"),
-
-        petVaccinationStatus:
-          formData.get("petVaccinationStatus"),
-
-        petFleasTicks:
-          formData.get("petFleasTicks"),
-
-        petComfortItems:
-          formData.get("petComfortItems"),
-
-        descriptionComfortItems:
-          formData.get("descriptionComfortItems"),
-
-        petPlayfulness:
-          formData.get("petPlayfulness"),
-
-        descriptionPlayfulness:
-          formData.get("descriptionPlayfulness"),
-
-        petFeedingFrequency:
-          formData.get("petFeedingFrequency"),
-
-        petSocialization:
-          formData.get("petSocialization"),
-
-        descriptionAdditionalInfo:
-          formData.get("descriptionAdditionalInfo"),
-
-        petDeclaration:
-          formData.get("petDeclaration"),
-
-        petVaccinationUrl:
-          fileUrl,
-      };
-
-      // Enviar datos a Google Sheets
-      const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbznfMH0-o1e0tIO43gjkvqAO3J4AD3Wt96Ued7vrwDQf3kKxiquwk7tqFCHzTFUXW8d/exec",
-        {
-          method: "POST",
-          body: new URLSearchParams(dataToSend),
-        }
-      );
+      const dataToSend =
+        buildDaycareData(
+          formData,
+          petVaccinationUrl
+        );
 
       const result =
-        await response.json();
+        await submitForm(
+          dataToSend
+        );
 
       console.log(result);
 
-      alert("Formulario enviado ✅");
+      alert(
+        "Formulario enviado ✅"
+      );
 
       e.target.reset();
 
@@ -143,7 +65,10 @@ export default function Daycare() {
 
       console.error(error);
 
-      alert("Error al enviar ❌");
+      alert(
+        "Error al enviar ❌"
+      );
+
     }
   };
   return (
@@ -298,13 +223,13 @@ export default function Daycare() {
           </div>
           <div>
             <label htmlFor="descriptionAdditionalInfo">¿Hay algo más que quieras que sepamos sobre tu perro o cualquier otra información importante que creas que deberíamos conocer para garantizar una experiencia positiva durante su estadía en nuestra guardería?</label>
-            <input type="text" id="descriptionAdditionalInfo" name='descriptionAdditionalInfo' />
+            <textarea name="descriptionAdditionalInfo" id="descriptionAdditionalInfo"></textarea>
           </div>
           <div>
             <label htmlFor="petDeclaration"> Declaro que acepto los términos y condiciones de la Guardería de Atenea, y autorizo voluntariamente que mi mascota sea cuidada por el personal de la guardería durante el tiempo acordado. Entiendo que la guardería tomará las medidas necesarias para garantizar el bienestar de mi mascota, y acepto que se sigan los protocolos establecidos en caso de emergencia.  </label>
             <select name="petDeclaration" id="petDeclaration" defaultValue="">
               <option value="" disabled >Seleccionar</option>
-              <option value="yes">Si</option>
+              <option value="si">Si</option>
               <option value="no">No</option>
             </select>
           </div>

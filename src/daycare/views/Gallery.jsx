@@ -1,3 +1,5 @@
+import '../Daycare.css';
+
 export default function Gallery() {
   return (
      <>
