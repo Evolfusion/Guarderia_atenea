@@ -28,6 +28,12 @@ export const buildDaycareData = (
     petBreed:
       formData.get("petBreed"),
 
+    petAge:
+      formData.get("petAge"),
+
+    petSize:
+      formData.get("petSize"),
+
     veterinarianInfo:
       formData.get("veterinarianInfo"),
 

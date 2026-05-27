@@ -92,111 +92,123 @@ export default function Reservations() {
           onSubmit={handleSubmit}
         >
 
-          <div>
-            <label htmlFor="serviceType">
-              Tipo de Servicio
-            </label>
-
-            <select
-              id="serviceType"
-              name="serviceType"
-              defaultValue=""
-              required
-            >
-              <option value="" disabled>
-                Seleccionar
-              </option>
-
-              <option value="Guarderia">
-                🏠 Guarderia
-              </option>
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="name">
-              Nombre Completo
-            </label>
-
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Tu nombre completo"
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="phone">
-              Número de Teléfono
-            </label>
-
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              placeholder="Tu número de teléfono"
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="petName">
-              Nombre de tu Mascota
-            </label>
-
-            <input
-              type="text"
-              id="petName"
-              name="petName"
-              placeholder="El nombre de tu mascota"
-              required
-            />
-          </div>
-
-          <div>
+          <fieldset>
+            <legend>Servicio</legend>
 
             <div>
-              <label htmlFor="startDate">
-                Desde
+              <label htmlFor="serviceType">
+                Tipo de Servicio
+              </label>
+
+              <select
+                id="serviceType"
+                name="serviceType"
+                defaultValue=""
+                required
+              >
+                <option value="" disabled>
+                  Seleccionar
+                </option>
+
+                <option value="Guarderia">
+                  🏠 Guarderia
+                </option>
+              </select>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Datos de contacto</legend>
+
+            <div>
+              <label htmlFor="name">
+                Nombre Completo
               </label>
 
               <input
-                type="date"
-                id="startDate"
-                name="startDate"
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Tu nombre completo"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="endDate">
-                Hasta
+              <label htmlFor="phone">
+                Número de Teléfono
               </label>
 
               <input
-                type="date"
-                id="endDate"
-                name="endDate"
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Tu número de teléfono"
                 required
               />
             </div>
 
-          </div>
+            <div>
+              <label htmlFor="petName">
+                Nombre de tu Mascota
+              </label>
 
-          <div>
-            <label htmlFor="time">
-              Horario de ingreso
-            </label>
+              <input
+                type="text"
+                id="petName"
+                name="petName"
+                placeholder="El nombre de tu mascota"
+                required
+              />
+            </div>
+          </fieldset>
 
-            <input
-              type="time"
-              id="time"
-              name="time"
-              required
-            />
-          </div>
+          <fieldset>
+            <legend>Fechas y horario</legend>
+
+            <div>
+
+              <div>
+                <label htmlFor="startDate">
+                  Desde
+                </label>
+
+                <input
+                  type="date"
+                  id="startDate"
+                  name="startDate"
+                  required
+                />
+              </div>
+
+              <div>
+                <label htmlFor="endDate">
+                  Hasta
+                </label>
+
+                <input
+                  type="date"
+                  id="endDate"
+                  name="endDate"
+                  required
+                />
+              </div>
+
+            </div>
+
+            <div>
+              <label htmlFor="time">
+                Horario de ingreso
+              </label>
+
+              <input
+                type="time"
+                id="time"
+                name="time"
+                required
+              />
+            </div>
+          </fieldset>
 
           <button
             type="submit"

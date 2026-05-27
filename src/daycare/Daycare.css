@@ -85,7 +85,10 @@
 }
 
 /* **Main** */
-.daycare__title{
+.daycare{
+    margin: var(--main-margin);
+}
+.daycare__title {
     font-family: var(--text-typography);
     font-size: 2rem;
     font-weight: bold;
@@ -93,7 +96,8 @@
     margin-bottom: 1rem;
     text-align: center;
 }
-.daycare__description{
+
+.daycare__description {
     font-size: 1rem;
     color: var(--color-text-secondary);
     line-height: 1.5;
@@ -101,12 +105,125 @@
     font-family: var(--text-typography);
     font-size: 1rem;
 }
-.daycare__img{
+
+.daycare__img {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.daycare__img-item{
+
+.daycare__img-item {
     margin: 0.40rem;
+}
+.daycare__img-item img{
+    width: 100%;
+    
+}
+/* **DAYCARE** */
+.daycare__form-container {
+    background-color: var(--form-background);
+    padding: var(--main-padding);
+    border-radius: 10px;
+    margin: var(--main-margin);
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.08),
+        0 8px 16px rgba(0, 0, 0, 0.12),
+        0 16px 32px rgba(0, 0, 0, 0.15),
+        0 24px 48px rgba(0, 0, 0, 0.18);
+}
+
+.daycare__form-title {
+    font-family: var(--text-typography);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-secondary);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.daycare__form-section {
+    border: none;
+}
+.daycare__form-legend{
+    font-family: var(--text-typography);
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.daycare__form-section-content {
+    border-top: 1px solid #01663067;
+    margin-bottom:1rem ;
+}
+.daycare__label{
+    font-family: var(--text-typography);
+    font-size: 1rem;
+    display: block;
+    margin-top: 1rem;
+}
+.daycare__input{
+    border-radius: 10px;
+    padding: 0.2rem;
+    width: 100%;
+    height: 2rem;
+    border: 1px solid #01663067;
+    outline: none;
+}
+
+.daycare__form-field--file{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="file"] {
+  text-align: center;
+  width: 100%;
+}
+
+input[type="file"]::file-selector-button {
+  display: block;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 10px 0;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 1rem;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: var(--color-secondary);
+}
+
+.daycare__input--textarea{
+    border-radius: 10px;
+    padding: 0.2rem;
+    width: 100%;
+    height: 10dvh;
+    border: 1px solid #01663067;
+    outline: none;
+    resize: none;
+}
+.daycare__form-actions > button{
+    font-family: var(--text-typography);
+    font-size: 0.875rem;
+    background-color: var(--color-primary);
+    color: white;
+    border-radius: 10px;
+    padding: 10px 20px;
+    border: none;
+    width: 100%;
+}
+#petVaccination {
+  font-size: 0;
+}
+
+#petVaccination::file-selector-button {
+  font-size: 14px;
 }

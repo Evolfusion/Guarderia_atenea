@@ -163,62 +163,69 @@ export default function Walks() {
 
         <form onSubmit={handleSubmit}>
 
-          <div>
-            <label htmlFor="ownerName">
-              Nombre y apellido
-            </label>
+          <fieldset>
+            <legend>Datos del dueño</legend>
 
-            <input
-              type="text"
-              id="ownerName"
-              name="ownerName"
-              required
-            />
-          </div>
+            <div>
+              <label htmlFor="ownerName">
+                Nombre y apellido
+              </label>
 
-          <div>
-            <label htmlFor="phone">
-              Celular principal
-            </label>
+              <input
+                type="text"
+                id="ownerName"
+                name="ownerName"
+                required
+              />
+            </div>
 
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              required
-            />
-          </div>
+            <div>
+              <label htmlFor="phone">
+                Celular principal
+              </label>
 
-          <div>
-            <label htmlFor="address">
-              Dirección
-            </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+              />
+            </div>
 
-            <input
-              type="text"
-              id="address"
-              name="address"
-              required
-            />
-          </div>
+            <div>
+              <label htmlFor="address">
+                Dirección
+              </label>
 
-          <div>
-            <label htmlFor="emergencyContact">
-              Contacto de emergencia
-            </label>
+              <input
+                type="text"
+                id="address"
+                name="address"
+                required
+              />
+            </div>
 
-            <input
-              type="text"
-              id="emergencyContact"
-              name="emergencyContact"
-              required
-            />
-          </div>
+            <div>
+              <label htmlFor="emergencyContact">
+                Contacto de emergencia
+              </label>
 
-          <div>
-            <label htmlFor="petName">
-              Nombre de la mascota
-            </label>
+              <input
+                type="text"
+                id="emergencyContact"
+                name="emergencyContact"
+                required
+              />
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Datos de la mascota</legend>
+
+            <div>
+              <label htmlFor="petName">
+                Nombre de la mascota
+              </label>
 
             <input
               type="text"
@@ -358,11 +365,15 @@ export default function Walks() {
               name="descriptionSpecialNeeds"
             />
           </div>
+          </fieldset>
 
-          <div>
-            <label htmlFor="petBehaviorWithDogs">
-              ¿Cómo se comporta con otros perros?
-            </label>
+          <fieldset>
+            <legend>Salud y comportamiento</legend>
+
+            <div>
+              <label htmlFor="petBehaviorWithDogs">
+                ¿Cómo se comporta con otros perros?
+              </label>
 
             <input
               type="text"
@@ -450,6 +461,10 @@ export default function Walks() {
               </option>
             </select>
           </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Detalles del paseo</legend>
 
           <div>
             <label htmlFor="walkHours">
@@ -511,6 +526,7 @@ export default function Walks() {
               name="additionalInfo"
             ></textarea>
           </div>
+          </fieldset>
 
           <div>
             <button type="submit">
