@@ -12,6 +12,8 @@ import {
   buildWalksData
 } from "../utils/buildWalksData";
 
+import { User, Dog, Heart, NotebookPen} from "lucide-react";
+
 export default function Walks() {
 
   const { uploadFile } = useUploadFile();
@@ -35,7 +37,7 @@ export default function Walks() {
         );
 
       const dataToSend = {
-          
+
         formType: "paseos",
 
         ownerName:
@@ -143,399 +145,144 @@ export default function Walks() {
   return (
     <>
       <section className='daycare'>
-
         <div className='daycare__header'>
-          <h1 className='daycare__title'>
-            PASEO DE PERROS
-          </h1>
+          <h1 className='daycare__title'>PASEO DE PERROS</h1>
         </div>
-
-        <p className='daycare__description'>
-          Ofrecemos paseos seguros,
-          personalizados y responsables
-          adaptados a las necesidades
-          de tu mascota.
-        </p>
-
+        <p className='daycare__description'>Ofrecemos paseos seguros,personalizados y responsablesadaptados a las necesidadesde tu mascota.</p>
       </section>
 
-      <section>
-
-        <form onSubmit={handleSubmit}>
-
-          <fieldset>
-            <legend>Datos del dueño</legend>
-
-            <div>
-              <label htmlFor="ownerName">
-                Nombre y apellido
-              </label>
-
-              <input
-                type="text"
-                id="ownerName"
-                name="ownerName"
-                required
-              />
+      <section className="daycare__form-container">
+        <h3 className="daycare__form-title">Formulario paseos</h3>
+        <form onSubmit={handleSubmit} className="daycare__form">
+          <fieldset className="daycare__form-section">
+            <legend className="daycare__form-legend"><User />Datos del dueño</legend>
+            <div className="daycare__form-field">
+              <label htmlFor="ownerName" className="daycare__label">Nombre y apellido</label>
+              <input type="text" id="ownerName"name="ownerName" className="daycare__input" required/>
             </div>
-
-            <div>
-              <label htmlFor="phone">
-                Celular principal
-              </label>
-
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                required
-              />
+            <div className="daycare__form-field">
+              <label htmlFor="phone" className="daycare__label">Celular principal</label>
+              <input type="tel" id="phone" name="phone" className="daycare__input" required />
             </div>
-
-            <div>
-              <label htmlFor="address">
-                Dirección
-              </label>
-
-              <input
-                type="text"
-                id="address"
-                name="address"
-                required
-              />
+            <div className="daycare__form-field">
+              <label htmlFor="address" className="daycare__label"> Dirección </label>
+              <input type="text" id="address" name="address" className="daycare__input" placeholder='Ej: Av. Santa Fe 3329' required/>
             </div>
-
-            <div>
-              <label htmlFor="emergencyContact">
-                Contacto de emergencia
-              </label>
-
-              <input
-                type="text"
-                id="emergencyContact"
-                name="emergencyContact"
-                required
-              />
+            <div className="daycare__form-field">
+              <label htmlFor="emergencyContact" className="daycare__label"> Contacto de emergencia </label>
+              <input type="text" id="emergencyContact" name="emergencyContact" className="daycare__input" placeholder='Ej: 1138748734' required/>
             </div>
           </fieldset>
-
-          <fieldset>
-            <legend>Datos de la mascota</legend>
-
-            <div>
-              <label htmlFor="petName">
-                Nombre de la mascota
+          <fieldset className="daycare__form-section">
+            <legend className="daycare__form-legend"> <Dog />Datos de la mascota</legend>
+            <div className="daycare__form-field">
+              <label htmlFor="petName" className="daycare__label">Nombre de la mascota</label>
+              <input type="text" id="petName" name="petName" className="daycare__input" required/>
+            </div>
+            <div className="daycare__form-field">
+              <label htmlFor="petAge" className="daycare__label"> Edad </label>
+              <input type="text" id="petAge" name="petAge" className="daycare__input" placeholder='Ej: 3' required/>
+            </div>
+            <div className="daycare__form-field">
+              <label htmlFor="petBreed" className="daycare__label"> Raza </label>
+              <input type="text" id="petBreed" name="petBreed" className="daycare__input" placeholder='Ej: Mestizo' required/>
+            </div>
+            <div className="daycare__form-field">
+              <label htmlFor="petSize" className="daycare__label">
+                Tamaño
               </label>
-
-            <input
-              type="text"
-              id="petName"
-              name="petName"
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="petAge">
-              Edad
-            </label>
-
-            <input
-              type="text"
-              id="petAge"
-              name="petAge"
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="petBreed">
-              Raza
-            </label>
-
-            <input
-              type="text"
-              id="petBreed"
-              name="petBreed"
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="petSize">
-              Tamaño
-            </label>
-
-            <select
-              id="petSize"
-              name="petSize"
-              defaultValue=""
-              required
-            >
-              <option value="" disabled>
-                Seleccionar
-              </option>
-
-              <option value="pequeño">
-                Pequeño
-              </option>
-
-              <option value="mediano">
-                Mediano
-              </option>
-
-              <option value="grande">
-                Grande
-              </option>
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="petVaccination">
-              Carnet de vacunación
-            </label>
-
-            <input
-              type="file"
-              id="petVaccination"
-              name="petVaccination"
-              accept=".jpg,.jpeg,.png,.pdf"
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="petVaccinationStatus">
-              ¿Vacunas al día?
-            </label>
-
-            <select
-              id="petVaccinationStatus"
-              name="petVaccinationStatus"
-              defaultValue=""
-              required
-            >
-              <option value="" disabled>
-                Seleccionar
-              </option>
-
-              <option value="si">
-                Si
-              </option>
-
-              <option value="no">
-                No
-              </option>
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="petSpecialNeeds">
-              ¿Tiene alergias o enfermedades?
-            </label>
-
-            <select
-              id="petSpecialNeeds"
-              name="petSpecialNeeds"
-              defaultValue=""
-              required
-            >
-              <option value="" disabled>
-                Seleccionar
-              </option>
-
-              <option value="si">
-                Si
-              </option>
-
-              <option value="no">
-                No
-              </option>
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="descriptionSpecialNeeds">
-              Descripción
-            </label>
-
-            <input
-              type="text"
-              id="descriptionSpecialNeeds"
-              name="descriptionSpecialNeeds"
-            />
-          </div>
+              <select id="petSize"name="petSize" defaultValue="" className="daycare__input" required >
+                <option value="" disabled> Seleccionar </option>
+                <option value="pequeño"> Pequeño</option>
+                <option value="mediano">Mediano</option>
+                <option value="grande">Grande</option>
+              </select>
+            </div>
+            <div className="daycare__form-field">
+              <label htmlFor="petVaccination" className="daycare__label"> Carnet de vacunación</label>
+              <input type="file" id="petVaccination" name="petVaccination" accept=".jpg,.jpeg,.png,.pdf"  required />
+            </div>
+            <div className="daycare__form-field">
+              <label htmlFor="petVaccinationStatus" className="daycare__label"> ¿Vacunas al día?</label>
+              <select id="petVaccinationStatus" name="petVaccinationStatus" defaultValue="" className="daycare__input" required >
+                <option value="" disabled> Seleccionar</option>
+                <option value="si"> Si </option>
+                <option value="no"> No </option>
+              </select>
+            </div>
+            <div className="daycare__form-field">
+              <label htmlFor="petSpecialNeeds" className="daycare__label">¿Tiene alergias o enfermedades?</label>
+              <select id="petSpecialNeeds" name="petSpecialNeeds" defaultValue="" className="daycare__input" required >
+                <option value="" disabled>Seleccionar</option>
+                <option value="si"> Si </option>
+                <option value="no">No</option>
+              </select>
+            </div>
+            <div className="daycare__form-field">
+              <label htmlFor="descriptionSpecialNeeds" className="daycare__label">Descripción</label>
+              <textarea id="descriptionSpecialNeeds" name="descriptionSpecialNeeds" className="daycare__input--textarea" placeholder="Ej: Alergia a las pulgas, necesita medicación diaria"></textarea>
+            </div>
           </fieldset>
-
-          <fieldset>
-            <legend>Salud y comportamiento</legend>
-
-            <div>
-              <label htmlFor="petBehaviorWithDogs">
-                ¿Cómo se comporta con otros perros?
+          <fieldset className="daycare__form-section">
+            <legend className="daycare__form-legend"> <Heart />Salud y comportamiento</legend>
+            <div className="daycare__form-field">
+              <label htmlFor="petBehaviorWithDogs" className="daycare__label"> ¿Cómo se comporta con otros perros?
               </label>
-
-            <input
-              type="text"
-              id="petBehaviorWithDogs"
-              name="petBehaviorWithDogs"
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="petPullsOnLeash">
-              ¿Tira de la correa?
-            </label>
-
-            <select
-              id="petPullsOnLeash"
-              name="petPullsOnLeash"
-              defaultValue=""
-              required
-            >
-              <option value="" disabled>
-                Seleccionar
-              </option>
-
-              <option value="si">
-                Si
-              </option>
-
-              <option value="no">
-                No
-              </option>
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="petAggressionHistory">
-              ¿Antecedentes de agresividad?
-            </label>
-
-            <select
-              id="petAggressionHistory"
-              name="petAggressionHistory"
-              defaultValue=""
-              required
-            >
-              <option value="" disabled>
-                Seleccionar
-              </option>
-
-              <option value="si">
-                Si
-              </option>
-
-              <option value="no">
-                No
-              </option>
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="energyLevel">
-              Nivel de energía
-            </label>
-
-            <select
-              id="energyLevel"
-              name="energyLevel"
-              defaultValue=""
-              required
-            >
-              <option value="" disabled>
-                Seleccionar
-              </option>
-
-              <option value="bajo">
-                Bajo
-              </option>
-
-              <option value="medio">
-                Medio
-              </option>
-
-              <option value="alto">
-                Alto
-              </option>
-            </select>
-          </div>
+              <input type="text" id="petBehaviorWithDogs" name="petBehaviorWithDogs" className="daycare__input" required/>
+            </div>
+            <div className="daycare__form-field">
+              <label htmlFor="petPullsOnLeash" className="daycare__label"> ¿Tira de la correa?</label>
+              <select id="petPullsOnLeash" name="petPullsOnLeash" defaultValue="" className="daycare__input" required >
+                <option value="" disabled> Seleccionar </option>
+                <option value="si">Si</option>
+                <option value="no"> No</option>
+              </select>
+            </div>
+            <div className="daycare__form-field">
+              <label htmlFor="petAggressionHistory" className="daycare__label"> ¿Antecedentes de agresividad?</label>
+              <select id="petAggressionHistory" name="petAggressionHistory" defaultValue="" className="daycare__input"required>
+                <option value="" disabled> Seleccionar</option>
+                <option value="si">Si</option>
+                <option value="no">No </option>
+              </select>
+            </div>
+            <div className="daycare__form-field">
+              <label htmlFor="energyLevel" className="daycare__label">Nivel de energía </label>
+              <select id="energyLevel" name="energyLevel" defaultValue="" className="daycare__input" required >
+                <option value="" disabled> Seleccionar </option>
+                <option value="bajo"> Bajo</option>
+                <option value="medio"> Medio</option>
+                <option value="alto"> Alto</option>
+              </select>
+            </div>
           </fieldset>
-
-          <fieldset>
-            <legend>Detalles del paseo</legend>
-
-          <div>
-            <label htmlFor="walkHours">
-              Horas de paseo
-            </label>
-
-            <select
-              id="walkHours"
-              name="walkHours"
-              defaultValue=""
-              required
-            >
-              <option value="" disabled>
-                Seleccionar
-              </option>
-
-              <option value="1">
-                1 hora
-              </option>
-
-              <option value="2">
-                2 horas
-              </option>
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="authorizeEmergencyVet">
-              ¿Autoriza veterinario en emergencia?
-            </label>
-
-            <select
-              id="authorizeEmergencyVet"
-              name="authorizeEmergencyVet"
-              defaultValue=""
-              required
-            >
-              <option value="" disabled>
-                Seleccionar
-              </option>
-
-              <option value="si">
-                Si
-              </option>
-
-              <option value="no">
-                No
-              </option>
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="additionalInfo">
-              Información adicional
-            </label>
-
-            <textarea
-              id="additionalInfo"
-              name="additionalInfo"
-            ></textarea>
-          </div>
+          <fieldset className="daycare__form-section">
+            <legend className="daycare__form-legend"> <NotebookPen />Detalles del paseo</legend>
+            <div className="daycare__form-field">
+              <label htmlFor="walkHours" className="daycare__label"> Horas de paseo</label>
+              <select id="walkHours" name="walkHours" defaultValue=""className="daycare__input"required>
+                <option value="" disabled> Seleccionar</option>
+                <option value="1">1 hora</option>
+                <option value="2">2 horas</option>
+              </select>
+            </div>
+            <div className="daycare__form-field">
+              <label htmlFor="authorizeEmergencyVet" className="daycare__label">¿Autoriza veterinario en emergencia?</label>
+              <select id="authorizeEmergencyVet" name="authorizeEmergencyVet" defaultValue=""className="daycare__input"required >
+                <option value="" disabled> Seleccionar</option>
+                <option value="si">Si</option>
+                <option value="no">No</option>
+              </select>
+            </div>
+            <div className="daycare__form-field">
+              <label htmlFor="additionalInfo" className="daycare__label"> Información adicional</label>
+              <textarea id="additionalInfo" name="additionalInfo" className="daycare__input--textarea" placeholder="Ej: Prefiere paseos tranquilos por el parque, no le gustan los ruidos fuertes" ></textarea>
+            </div>
           </fieldset>
-
-          <div>
-            <button type="submit">
-              Enviar
-            </button>
+          <div className="daycare__form-actions daycare__form-field">
+            <button type="submit">Enviar </button>
           </div>
-
         </form>
-
       </section>
     </>
   );

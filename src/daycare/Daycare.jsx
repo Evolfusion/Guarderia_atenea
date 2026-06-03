@@ -15,6 +15,7 @@ import {
   buildDaycareData
 } from "../daycare/utils/buildDaycareData";
 import { User, Dog, Heart, NotebookPen} from "lucide-react";
+
 export default function Daycare() {
 
   const [selectedVaccinationFileName, setSelectedVaccinationFileName] = useState(" ");
@@ -97,7 +98,7 @@ export default function Daycare() {
             <legend className="daycare__form-legend"> <User /> Datos del dueño</legend>
             <section className="daycare__form-section-content">
               <div className="daycare__form-field">
-                <label htmlFor="ownerName" className="daycare__label">Nombre y apellido del dueño</label>
+                <label htmlFor="ownerName" className="daycare__label">Nombre y apellido</label>
                 <input type="text" id="ownerName" name="ownerName" className="daycare__input" required />
               </div>
               <div className="daycare__form-field">
@@ -110,11 +111,11 @@ export default function Daycare() {
               </div>
               <div className="daycare__form-field">
                 <label htmlFor="address" className="daycare__label">Dirección de domicilio</label>
-                <input type="text" id="address" name="address" className="daycare__input" required />
+                <input type="text" id="address" name="address" className="daycare__input" placeholder="Ej: A renales 3367" required />
               </div>
               <div className="daycare__form-field">
                 <label htmlFor="idDocument" className="daycare__label">Documento de identidad</label>
-                <input type="text" id="idDocument" name="idDocument" className="daycare__input" required />
+                <input type="text" id="idDocument" name="idDocument" className="daycare__input" placeholder="Ej: 43764345" required />
               </div>
             </section>
           </fieldset>
@@ -127,12 +128,12 @@ export default function Daycare() {
                 <input type="text" id="petName" name="petName" className="daycare__input" required />
               </div>
               <div className="daycare__form-field">
-                <label htmlFor="petBreed" className="daycare__label">Raza de la mascota</label>
-                <input type="text" id="petBreed" name="petBreed" className="daycare__input" required />
+                <label htmlFor="petBreed" className="daycare__label" >Raza de la mascota</label>
+                <input type="text" id="petBreed" name="petBreed" className="daycare__input" placeholder="Ej: Mestizo" required />
               </div>
               <div className="daycare__form-field">
                 <label htmlFor="petAge" className="daycare__label">Edad de la mascota</label>
-                <input type="number" id="petAge" name="petAge" min="0" step="1" className="daycare__input" required />
+                <input type="number" id="petAge" name="petAge" min="0" step="1" className="daycare__input" placeholder="Ej: 3" required />
               </div>
               <div className="daycare__form-field">
                 <label htmlFor="petSize" className="daycare__label">Tamaño de la mascota</label>
@@ -150,7 +151,7 @@ export default function Daycare() {
               </div>
               <div className="daycare__form-field">
                 <label htmlFor="veterinarianInfo" className="daycare__label">Nombre y contacto del veterinario (opcional)</label>
-                <input type="text" id="veterinarianInfo" name="veterinarianInfo" className="daycare__input" />
+                <input type="text" id="veterinarianInfo" name="veterinarianInfo" className="daycare__input" placeholder="Ej: Dr. Juan Pérez - 1138748734" />
               </div>
             </section>
           </fieldset>
@@ -228,7 +229,7 @@ export default function Daycare() {
               </div>
               <div className="daycare__form-field">
                 <label htmlFor="descriptionComfortItems" className="daycare__label">Descripción</label>
-                <input type="text" id="descriptionComfortItems" name="descriptionComfortItems" className="daycare__input" />
+                <textarea id="descriptionComfortItems" name="descriptionComfortItems"  className="daycare__input--textarea" placeholder="Ej: Una manta azul"></textarea>
               </div>
               <div className="daycare__form-field">
                 <label htmlFor="petPlayfulness" className="daycare__label">¿Tu mascota le gusta ir a la plaza?</label>
@@ -240,7 +241,7 @@ export default function Daycare() {
               </div>
               <div className="daycare__form-field">
                 <label htmlFor="descriptionPlayfulness" className="daycare__label">¿Cuántas veces al día le gusta salir a pasear a tu mascota?</label>
-                <input type="text" id="descriptionPlayfulness" name="descriptionPlayfulness" className="daycare__input" />
+                <input type="text" id="descriptionPlayfulness" name="descriptionPlayfulness" className="daycare__input" placeholder="Ej: 2 veces al día" />
               </div>
               <div className="daycare__form-field">
                 <label htmlFor="petFeedingFrequency" className="daycare__label">¿Cuántas veces al día come tu mascota?</label>
@@ -263,7 +264,7 @@ export default function Daycare() {
               </div>
               <div className="daycare__form-field">
                 <label htmlFor="descriptionAdditionalInfo" className="daycare__label">¿Hay algo más que quieras que sepamos sobre tu perro?</label>
-                <textarea name="descriptionAdditionalInfo" id="descriptionAdditionalInfo"  className="daycare__input--textarea"></textarea>
+                <textarea name="descriptionAdditionalInfo" id="descriptionAdditionalInfo"  className="daycare__input--textarea" placeholder="Ej: Es muy juguetón y le encanta correr en el parque"></textarea>
               </div>
               <div className="daycare__form-field">
                 <label htmlFor="petDeclaration" className="daycare__label">Declaro que acepto los términos y condiciones de la Guardería de Atenea y autorizo el cuidado de mi mascota.</label>

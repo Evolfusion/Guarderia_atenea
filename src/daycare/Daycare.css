@@ -195,6 +195,7 @@ input[type="file"]::file-selector-button {
   width: 100%;
   box-sizing: border-box;
   margin-top: 1rem;
+  cursor: pointer;
 }
 
 input[type="file"]::file-selector-button:hover {
@@ -219,6 +220,13 @@ input[type="file"]::file-selector-button:hover {
     padding: 10px 20px;
     border: none;
     width: 100%;
+    cursor: pointer;
+}
+.daycare__form-actions > button:hover{
+    background-color: var(--color-secondary);
+}
+.daycare__form-field{
+    margin-bottom: 1rem;
 }
 #petVaccination {
   font-size: 0;
@@ -226,4 +234,8 @@ input[type="file"]::file-selector-button:hover {
 
 #petVaccination::file-selector-button {
   font-size: 14px;
+}
+
+.reservation-form__legend{
+    margin-bottom: 1rem;
 }
