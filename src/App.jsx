@@ -1,11 +1,15 @@
-import AppRoutes from './daycare/routes/AppRoutes'; // Importación correcta de AppRoutes
+import AppRoutes from './daycare/routes/AppRoutes';
+import Footer from './components/Footer';
 
 function App() {
   return (
-   <main>
-     <AppRoutes />
-   </main>
-  )
+    <>
+      <main>
+        <AppRoutes />
+      </main>
+      <Footer />
+    </>
+  );
 }
 
 export default App

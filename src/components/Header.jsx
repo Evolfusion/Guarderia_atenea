@@ -10,7 +10,7 @@ export default function Header(){
             <nav className="header__nav" ref={menuRef}>
                 <div className="header__logo">
                     <Link to="/">
-                        <img src="../../public/img/logo.png" alt="logo de guarderia atenea" className="header__logo-img"/>
+                        <img src="/img/logo.png" alt="logo de guarderia atenea" className="header__logo-img"/>
                     </Link>
                 </div>
 

@@ -85,9 +85,10 @@
 }
 
 /* **Main** */
-.daycare{
+.daycare {
     margin: var(--main-margin);
 }
+
 .daycare__title {
     font-family: var(--text-typography);
     font-size: 2rem;
@@ -104,6 +105,7 @@
     text-align: center;
     font-family: var(--text-typography);
     font-size: 1rem;
+    margin-bottom: 2rem;
 }
 
 .daycare__img {
@@ -116,17 +118,19 @@
 .daycare__img-item {
     margin: 0.40rem;
 }
-.daycare__img-item img{
+
+.daycare__img-item img {
     width: 100%;
-    
+
 }
+
 /* **DAYCARE** */
 .daycare__form-container {
     background-color: var(--form-background);
     padding: var(--main-padding);
     border-radius: 10px;
     margin: var(--main-margin);
-    box-shadow: 
+    box-shadow:
         0 2px 4px rgba(0, 0, 0, 0.08),
         0 8px 16px rgba(0, 0, 0, 0.12),
         0 16px 32px rgba(0, 0, 0, 0.15),
@@ -145,7 +149,8 @@
 .daycare__form-section {
     border: none;
 }
-.daycare__form-legend{
+
+.daycare__form-legend {
     font-family: var(--text-typography);
     font-size: 1rem;
     font-weight: bold;
@@ -154,17 +159,20 @@
     align-items: center;
     gap: 0.5rem;
 }
+
 .daycare__form-section-content {
     border-top: 1px solid #01663067;
-    margin-bottom:1rem ;
+    margin-bottom: 1rem;
 }
-.daycare__label{
+
+.daycare__label {
     font-family: var(--text-typography);
     font-size: 1rem;
     display: block;
     margin-top: 1rem;
 }
-.daycare__input{
+
+.daycare__input {
     border-radius: 10px;
     padding: 0.2rem;
     width: 100%;
@@ -173,36 +181,37 @@
     outline: none;
 }
 
-.daycare__form-field--file{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.daycare__form-field--file {
+    display: flex;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 input[type="file"] {
-  text-align: center;
-  width: 100%;
+    text-align: center;
+    width: 100%;
 }
 
 input[type="file"]::file-selector-button {
-  display: block;
-  background-color: var(--color-primary);
-  color: white;
-  border: none;
-  padding: 10px 0;
-  border-radius: 8px;
-  width: 100%;
-  box-sizing: border-box;
-  margin-top: 1rem;
-  cursor: pointer;
+    display: block;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 10px 0;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 1rem;
+    cursor: pointer;
 }
 
 input[type="file"]::file-selector-button:hover {
-  background-color: var(--color-secondary);
+    background-color: var(--color-secondary);
 }
 
-.daycare__input--textarea{
+.daycare__input--textarea {
     border-radius: 10px;
     padding: 0.2rem;
     width: 100%;
@@ -211,7 +220,8 @@ input[type="file"]::file-selector-button:hover {
     outline: none;
     resize: none;
 }
-.daycare__form-actions > button{
+
+.daycare__form-actions>button {
     font-family: var(--text-typography);
     font-size: 0.875rem;
     background-color: var(--color-primary);
@@ -222,20 +232,221 @@ input[type="file"]::file-selector-button:hover {
     width: 100%;
     cursor: pointer;
 }
-.daycare__form-actions > button:hover{
+
+.daycare__form-actions>button:hover {
     background-color: var(--color-secondary);
 }
-.daycare__form-field{
+
+.daycare__form-field {
     margin-bottom: 1rem;
 }
+
 #petVaccination {
-  font-size: 0;
+    font-size: 0;
 }
 
 #petVaccination::file-selector-button {
-  font-size: 14px;
+    font-size: 14px;
 }
 
-.reservation-form__legend{
+.reservation-form__legend {
     margin-bottom: 1rem;
+}
+
+/* Animación suave al pasar el mouse */
+.react-photo-album img {
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.react-photo-album img:hover {
+  transform: scale(1.03);
+}
+.react-photo-album img {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.react-photo-album img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+.footer{
+    background-color: var(--color-primary);
+    padding: 1rem;
+    text-align: center;
+}
+.footer__title{
+    font-family: var(--text-typography);
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+.footer__text{
+    font-size: 0.875rem;
+    color: white;  }
+
+/** TABLET */
+@media (min-width: 768px) {
+    .header__nav {
+        padding: 0.5rem 2rem;
+    }
+
+    .header__menu-link:hover {
+        background-color: transparent;
+        border-bottom: 2px solid var(--color-secondary);
+    }
+
+    .header__logo-img {
+        width: 90px;
+    }
+
+    .daycare {
+        margin: 2rem auto;
+        max-width: 900px;
+    }
+
+    .daycare__title {
+        font-size: 2.6rem;
+    }
+
+    .daycare__description {
+        font-size: 1.05rem;
+        max-width: 720px;
+        margin: 0 auto 1.5rem;
+    }
+
+    .daycare__img {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .daycare__img-item {
+        width: min(100%, 480px);
+    }
+
+    .daycare__form-container {
+        max-width: 960px;
+        margin: 2rem auto;
+        padding: 2rem;
+    }
+
+    .daycare__form-section-content {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+    }
+
+    .daycare__form-field--file,
+    .daycare__form-field:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .daycare__form-actions {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .daycare__form-actions>button {
+        width: auto;
+        min-width: 220px;
+    }
+}
+
+/** Laptop */
+@media (min-width: 1024px) {
+    .header__nav {
+        padding: 0.5rem 3rem;
+    }
+
+    .header__hamburger {
+        display: none;
+    }
+
+    .header__menu {
+        position: static;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+        max-height: none;
+        opacity: 1;
+        overflow: visible;
+        background-color: transparent;
+        box-shadow: none;
+    }
+
+    .header__menu li {
+        width: auto;
+        border-bottom: none;
+    }
+
+    .header__menu-link {
+        color: var(--color-secondary);
+        padding: 0.75rem 0.9rem;
+    }
+
+    .daycare {
+        max-width: 1100px;
+    }
+
+    .daycare__title {
+        font-size: 3rem;
+    }
+
+    .daycare__description {
+        font-size: 1.1rem;
+        max-width: 800px;
+    }
+
+    .daycare__form-container {
+        max-width: 1100px;
+        padding: 2.5rem;
+    }
+
+    .daycare__form-section-content {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .daycare__form-field--file {
+        grid-column: span 2;
+    }
+}
+
+/** escritorio*/
+@media (min-width: 1280px) {
+    .header__nav {
+        padding: 0.5rem 4rem;
+    }
+
+    .daycare {
+        max-width: 1200px;
+    }
+
+    .daycare__title {
+        font-size: 3.4rem;
+    }
+
+    .daycare__description {
+        font-size: 1.15rem;
+        max-width: 900px;
+    }
+
+    .daycare__form-container {
+        max-width: 1240px;
+        padding: 3rem;
+    }
+
+    .daycare__form-section-content {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .daycare__form-field--file {
+        grid-column: span 2;
+    }
 }
