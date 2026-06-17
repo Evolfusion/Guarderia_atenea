@@ -1,4 +1,5 @@
 import '../Daycare.css';
+import { useState } from "react";
 
 import {
   useUploadFile
@@ -12,9 +13,13 @@ import {
   buildWalksData
 } from "../utils/buildWalksData";
 
-import { User, Dog, Heart, NotebookPen} from "lucide-react";
+import { User, Dog, Heart, NotebookPen } from "lucide-react";
+
+import LoadingOverlay from "../../components/LoadingOverlay";
 
 export default function Walks() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const { uploadFile } = useUploadFile();
 
@@ -23,6 +28,7 @@ export default function Walks() {
   const handleSubmit = async (e) => {
 
     e.preventDefault();
+    setIsSubmitting(true);
 
     try {
 
@@ -128,27 +134,36 @@ export default function Walks() {
 
       console.log(result);
 
-      alert("Formulario enviado ✅");
-
+      setSubmitSuccess(true);
       e.target.reset();
+
+      setTimeout(() => {
+        setSubmitSuccess(false);
+      }, 3000);
 
     } catch (error) {
 
       console.error(error);
 
-      alert("Error al enviar ❌");
-
+    } finally {
+      setIsSubmitting(false);
     }
 
   };
 
   return (
     <>
+      {isSubmitting && <LoadingOverlay />}
+      {submitSuccess && (
+        <div className="success-message">
+          ✅ Formulario enviado correctamente
+        </div>
+      )}
       <section className='daycare'>
         <div className='daycare__header'>
           <h1 className='daycare__title'>PASEO DE PERROS</h1>
         </div>
-        <p className='daycare__description'>Ofrecemos paseos seguros,personalizados y responsablesadaptados a las necesidadesde tu mascota.</p>
+        <p className='daycare__description'>Ofrecemos paseos seguros,personalizados y responsables, adaptados a las necesidadesde tu mascota.</p>
       </section>
 
       <section className="daycare__form-container">
@@ -158,7 +173,7 @@ export default function Walks() {
             <legend className="daycare__form-legend"><User />Datos del dueño</legend>
             <div className="daycare__form-field">
               <label htmlFor="ownerName" className="daycare__label">Nombre y apellido</label>
-              <input type="text" id="ownerName"name="ownerName" className="daycare__input" required/>
+              <input type="text" id="ownerName" name="ownerName" className="daycare__input" required />
             </div>
             <div className="daycare__form-field">
               <label htmlFor="phone" className="daycare__label">Celular principal</label>
@@ -166,32 +181,32 @@ export default function Walks() {
             </div>
             <div className="daycare__form-field">
               <label htmlFor="address" className="daycare__label"> Dirección </label>
-              <input type="text" id="address" name="address" className="daycare__input" placeholder='Ej: Av. Santa Fe 3329' required/>
+              <input type="text" id="address" name="address" className="daycare__input" placeholder='Ej: Av. Santa Fe 3329' required />
             </div>
             <div className="daycare__form-field">
               <label htmlFor="emergencyContact" className="daycare__label"> Contacto de emergencia </label>
-              <input type="text" id="emergencyContact" name="emergencyContact" className="daycare__input" placeholder='Ej: 1138748734' required/>
+              <input type="text" id="emergencyContact" name="emergencyContact" className="daycare__input" placeholder='Ej: 1138748734' required />
             </div>
           </fieldset>
           <fieldset className="daycare__form-section">
             <legend className="daycare__form-legend"> <Dog />Datos de la mascota</legend>
             <div className="daycare__form-field">
               <label htmlFor="petName" className="daycare__label">Nombre de la mascota</label>
-              <input type="text" id="petName" name="petName" className="daycare__input" required/>
+              <input type="text" id="petName" name="petName" className="daycare__input" required />
             </div>
             <div className="daycare__form-field">
               <label htmlFor="petAge" className="daycare__label"> Edad </label>
-              <input type="text" id="petAge" name="petAge" className="daycare__input" placeholder='Ej: 3' required/>
+              <input type="text" id="petAge" name="petAge" className="daycare__input" placeholder='Ej: 3' required />
             </div>
             <div className="daycare__form-field">
               <label htmlFor="petBreed" className="daycare__label"> Raza </label>
-              <input type="text" id="petBreed" name="petBreed" className="daycare__input" placeholder='Ej: Mestizo' required/>
+              <input type="text" id="petBreed" name="petBreed" className="daycare__input" placeholder='Ej: Mestizo' required />
             </div>
             <div className="daycare__form-field">
               <label htmlFor="petSize" className="daycare__label">
                 Tamaño
               </label>
-              <select id="petSize"name="petSize" defaultValue="" className="daycare__input" required >
+              <select id="petSize" name="petSize" defaultValue="" className="daycare__input" required >
                 <option value="" disabled> Seleccionar </option>
                 <option value="pequeño"> Pequeño</option>
                 <option value="mediano">Mediano</option>
@@ -200,7 +215,7 @@ export default function Walks() {
             </div>
             <div className="daycare__form-field">
               <label htmlFor="petVaccination" className="daycare__label"> Carnet de vacunación</label>
-              <input type="file" id="petVaccination" name="petVaccination" accept=".jpg,.jpeg,.png,.pdf"  required />
+              <input type="file" id="petVaccination" name="petVaccination" accept=".jpg,.jpeg,.png,.pdf" required />
             </div>
             <div className="daycare__form-field">
               <label htmlFor="petVaccinationStatus" className="daycare__label"> ¿Vacunas al día?</label>
@@ -228,7 +243,7 @@ export default function Walks() {
             <div className="daycare__form-field">
               <label htmlFor="petBehaviorWithDogs" className="daycare__label"> ¿Cómo se comporta con otros perros?
               </label>
-              <input type="text" id="petBehaviorWithDogs" name="petBehaviorWithDogs" className="daycare__input" required/>
+              <input type="text" id="petBehaviorWithDogs" name="petBehaviorWithDogs" className="daycare__input" required />
             </div>
             <div className="daycare__form-field">
               <label htmlFor="petPullsOnLeash" className="daycare__label"> ¿Tira de la correa?</label>
@@ -240,7 +255,7 @@ export default function Walks() {
             </div>
             <div className="daycare__form-field">
               <label htmlFor="petAggressionHistory" className="daycare__label"> ¿Antecedentes de agresividad?</label>
-              <select id="petAggressionHistory" name="petAggressionHistory" defaultValue="" className="daycare__input"required>
+              <select id="petAggressionHistory" name="petAggressionHistory" defaultValue="" className="daycare__input" required>
                 <option value="" disabled> Seleccionar</option>
                 <option value="si">Si</option>
                 <option value="no">No </option>
@@ -260,7 +275,7 @@ export default function Walks() {
             <legend className="daycare__form-legend"> <NotebookPen />Detalles del paseo</legend>
             <div className="daycare__form-field">
               <label htmlFor="walkHours" className="daycare__label"> Horas de paseo</label>
-              <select id="walkHours" name="walkHours" defaultValue=""className="daycare__input"required>
+              <select id="walkHours" name="walkHours" defaultValue="" className="daycare__input" required>
                 <option value="" disabled> Seleccionar</option>
                 <option value="1">1 hora</option>
                 <option value="2">2 horas</option>
@@ -268,7 +283,7 @@ export default function Walks() {
             </div>
             <div className="daycare__form-field">
               <label htmlFor="authorizeEmergencyVet" className="daycare__label">¿Autoriza veterinario en emergencia?</label>
-              <select id="authorizeEmergencyVet" name="authorizeEmergencyVet" defaultValue=""className="daycare__input"required >
+              <select id="authorizeEmergencyVet" name="authorizeEmergencyVet" defaultValue="" className="daycare__input" required >
                 <option value="" disabled> Seleccionar</option>
                 <option value="si">Si</option>
                 <option value="no">No</option>
@@ -280,7 +295,12 @@ export default function Walks() {
             </div>
           </fieldset>
           <div className="daycare__form-actions daycare__form-field">
-            <button type="submit">Enviar </button>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Enviando..." : "Enviar"}
+            </button>
           </div>
         </form>
       </section>

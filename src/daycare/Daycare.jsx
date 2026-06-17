@@ -14,11 +14,14 @@ import {
 import {
   buildDaycareData
 } from "../daycare/utils/buildDaycareData";
-import { User, Dog, Heart, NotebookPen} from "lucide-react";
+import { User, Dog, Heart, NotebookPen } from "lucide-react";
+import LoadingOverlay from "../components/LoadingOverlay";
+
 
 export default function Daycare() {
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedVaccinationFileName, setSelectedVaccinationFileName] = useState(" ");
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const { uploadFile } =
     useUploadFile();
@@ -33,21 +36,17 @@ export default function Daycare() {
   // Función para manejar el envío del formulario
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
+    setIsSubmitting(true);
 
     try {
-
-      const formData =
-        new FormData(e.target);
+      const formData = new FormData(e.target);
 
       const petVaccinationFile =
         formData.get("petVaccination");
 
       const petVaccinationUrl =
-        await uploadFile(
-          petVaccinationFile
-        );
+        await uploadFile(petVaccinationFile);
 
       const dataToSend =
         buildDaycareData(
@@ -55,40 +54,44 @@ export default function Daycare() {
           petVaccinationUrl
         );
 
-      const result =
-        await submitForm(
-          dataToSend
-        );
+      console.log("Datos enviados:", dataToSend);
 
-      console.log(result);
+      const result = await submitForm(dataToSend);
 
-      alert(
-        "Formulario enviado ✅"
-      );
-
+      console.log("Resultado:", result);
+      setSubmitSuccess(true);
+      setTimeout(() => {
+        setSubmitSuccess(false);
+      }, 3000);
       e.target.reset();
 
+      setSelectedVaccinationFileName("Seleccionar archivo");
+
     } catch (error) {
-
       console.error(error);
-
-      alert(
-        "Error al enviar ❌"
-      );
-
+      alert("Error al enviar ❌");
+    } finally {
+      setIsSubmitting(false);
     }
   };
   return (
     <>
+      {isSubmitting && <LoadingOverlay />}
+      {submitSuccess && (
+        <div className="success-message">
+          ✅ Formulario enviado correctamente
+        </div>
+      )}
+
       <section className="daycare">
         <div className="daycare__header">
           <h1 className="daycare__title">GUARDERÍA CANINA</h1>
         </div>
         <p className="daycare__description">Ofrecemos un ambiente familiar y seguro con cuidado personalizado para tu mascota. Nuestro equipo está capacitado para brindarle atención, juego y mucho amor mientras estás fuera.</p>
         <div className="daycare__img">
-            <div  className="daycare__img-item">
-             <img src="/img/familia-portada.jpg" alt="Familia de perros" loading="lazy" />
-            </div>
+          <div className="daycare__img-item">
+            <img src="/img/familia-portada.jpg" alt="Familia de perros" loading="lazy" />
+          </div>
         </div>
       </section>
       <section className="daycare__form-container">
@@ -229,7 +232,7 @@ export default function Daycare() {
               </div>
               <div className="daycare__form-field">
                 <label htmlFor="descriptionComfortItems" className="daycare__label">Descripción</label>
-                <textarea id="descriptionComfortItems" name="descriptionComfortItems"  className="daycare__input--textarea" placeholder="Ej: Una manta azul"></textarea>
+                <textarea id="descriptionComfortItems" name="descriptionComfortItems" className="daycare__input--textarea" placeholder="Ej: Una manta azul"></textarea>
               </div>
               <div className="daycare__form-field">
                 <label htmlFor="petPlayfulness" className="daycare__label">¿Tu mascota le gusta ir a la plaza?</label>
@@ -256,7 +259,7 @@ export default function Daycare() {
               </div>
               <div className="daycare__form-field">
                 <label htmlFor="petSocialization" className="daycare__label">Autorizo a mi mascota a que aparezca en el Instagram de la guardería</label>
-                <select name="petSocialization" id="petSocialization" className="daycare__input"  defaultValue="" required>
+                <select name="petSocialization" id="petSocialization" className="daycare__input" defaultValue="" required>
                   <option value="" disabled>Seleccionar</option>
                   <option value="si">Sí</option>
                   <option value="no">No</option>
@@ -264,7 +267,7 @@ export default function Daycare() {
               </div>
               <div className="daycare__form-field">
                 <label htmlFor="descriptionAdditionalInfo" className="daycare__label">¿Hay algo más que quieras que sepamos sobre tu perro?</label>
-                <textarea name="descriptionAdditionalInfo" id="descriptionAdditionalInfo"  className="daycare__input--textarea" placeholder="Ej: Es muy juguetón y le encanta correr en el parque"></textarea>
+                <textarea name="descriptionAdditionalInfo" id="descriptionAdditionalInfo" className="daycare__input--textarea" placeholder="Ej: Es muy juguetón y le encanta correr en el parque"></textarea>
               </div>
               <div className="daycare__form-field">
                 <label htmlFor="petDeclaration" className="daycare__label">Declaro que acepto los términos y condiciones de la Guardería de Atenea y autorizo el cuidado de mi mascota.</label>
@@ -278,7 +281,12 @@ export default function Daycare() {
           </fieldset>
 
           <div className="daycare__form-actions">
-            <button type="submit">Enviar</button>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Enviando..." : "Enviar"}
+            </button>
           </div>
         </form>
       </section>
