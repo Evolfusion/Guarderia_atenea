@@ -1,21 +1,123 @@
 import '../Daycare.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LoadingOverlay from "../../components/LoadingOverlay";
-
-import {
-  useSubmitForm
-} from "../hooks/useSubmitForm";
+import { useSubmitForm } from "../hooks/useSubmitForm";
 
 import { User, Dog, Calendar, PawPrint } from "lucide-react";
 
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import esLocale from "@fullcalendar/core/locales/es";
+
 export default function Reservations() {
+
+  const [capacity, setCapacity] = useState({});
+  const [selectedRange, setSelectedRange] = useState(null);
+  const [rangeStart, setRangeStart] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [calendarRefresh, setCalendarRefresh] = useState(0);
 
   const { submitForm } = useSubmitForm();
 
+  const fetchCapacity = async () => {
+    try {
+      const res = await fetch(
+        "https://script.google.com/macros/s/AKfycbxdV3jc741f87a85_OqPfMVKeiAcz1xumVNkd3yVeTZAfrbfwmE0rV8QINDbxO-LOu4/exec?cache=" + Date.now()
+      );
+
+      const data = await res.json();
+
+      setCapacity(data || {});
+      setCalendarRefresh(prev => prev + 1);
+
+    } catch (error) {
+      console.error("Error cargando disponibilidad", error);
+    }
+  };
+  // Cargar cupos al abrir la página
+  useEffect(() => {
+    fetchCapacity();
+  }, []);
+
+
+  // 🧠 FECHA NORMALIZADA (FIX IMPORTANTE)
+  const normalizeDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  };
+  const parseLocalDate = (dateStr) => {
+    const [year, month, day] = dateStr.split("-").map(Number);
+    return new Date(year, month - 1, day);
+  };
+  // 🧠 OBTENER CUPOS
+  const getCount = (date) => {
+    return capacity?.[date] ?? 0;
+  };
+
+  // 🚀 SELECCIÓN TIPO AIRBNB
+  const handleDateClick = (info) => {
+    const clickedDate = new Date(info.date);
+    const clickedISO = normalizeDate(clickedDate);
+
+    if ((capacity?.[clickedISO] || 0) >= 3) {
+      alert("No hay cupos para esa fecha");
+      return;
+    }
+
+    // Primer click
+    if (!rangeStart) {
+      setRangeStart(clickedISO);
+
+      setSelectedRange({
+        start: clickedISO,
+        end: clickedISO
+      });
+
+      return;
+    }
+
+    // Segundo click
+    let startDate = parseLocalDate(rangeStart);
+    let endDate = clickedDate;
+
+    if (endDate < startDate) {
+      [startDate, endDate] = [endDate, startDate];
+    }
+
+    // Validar rango
+    for (
+      let d = new Date(startDate);
+      d <= endDate;
+      d.setDate(d.getDate() + 1)
+    ) {
+      const iso = normalizeDate(d);
+
+      if ((capacity?.[iso] || 0) >= 3) {
+        setRangeStart(null);
+        setSelectedRange(null);
+        return;
+      }
+    }
+
+    setSelectedRange({
+      start: normalizeDate(startDate),
+      end: normalizeDate(endDate)
+    });
+
+    setRangeStart(null);
+  };
+
+  // 📤 SUBMIT
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!selectedRange) return;
+
     setIsSubmitting(true);
 
     try {
@@ -23,49 +125,38 @@ export default function Reservations() {
 
       const dataToSend = {
         formType: "reservas",
-
-        serviceType:
-          formData.get("serviceType"),
-
-        name:
-          formData.get("name"),
-
-        phone:
-          formData.get("phone"),
-
-        petName:
-          formData.get("petName"),
-
-        startDate:
-          formData.get("startDate"),
-
-        endDate:
-          formData.get("endDate"),
-
-        time:
-          formData.get("time"),
+        serviceType: formData.get("serviceType"),
+        name: formData.get("name"),
+        phone: formData.get("phone"),
+        petName: formData.get("petName"),
+        startDate: selectedRange.start,
+        endDate: selectedRange.end,
+        time: formData.get("time"),
       };
 
-      console.log(dataToSend);
-
-      const result = await submitForm(dataToSend);
-
-      console.log(result);
+      await submitForm(dataToSend);
+      await fetchCapacity();
 
       setSubmitSuccess(true);
-
-      setTimeout(() => {
-        setSubmitSuccess(false);
-      }, 3000);
+      setTimeout(() => setSubmitSuccess(false), 3000);
 
       e.target.reset();
+      setSelectedRange(null);
+      setRangeStart(null);
 
     } catch (error) {
       console.error(error);
-      alert("Error al enviar ❌");
     } finally {
       setIsSubmitting(false);
     }
+  };
+  const isInRange = (date) => {
+    if (!selectedRange) return false;
+
+    return (
+      date >= selectedRange.start &&
+      date <= selectedRange.end
+    );
   };
 
   return (
@@ -78,24 +169,17 @@ export default function Reservations() {
         </div>
       )}
 
+      {/* HEADER */}
       <section className='daycare'>
-        <div className='daycare__header'>
-          <h1 className='daycare__title'>
-            RESERVAR ESTADÍA
-          </h1>
-        </div>
-
+        <h1 className='daycare__title'>RESERVAR ESTADÍA</h1>
         <p className='daycare__description'>
-          Completá el formulario y nos pondremos
-          en contacto con vos para confirmar
-          tu reserva.
+          Completá el formulario y nos pondremos en contacto con vos para confirmar tu reserva.
         </p>
       </section>
-
+      {/* FORMULARIO ORIGINAL */}
       <section className="daycare__form-container">
-        <h3 className="daycare__form-title">Formulario reservas</h3>
 
-        <form className='reservation-form' onSubmit={handleSubmit}>
+        <form className="reservation-form" onSubmit={handleSubmit}>
           <fieldset className="daycare__form-section">
             <div className="daycare__form-field">
               <label
@@ -173,36 +257,8 @@ export default function Reservations() {
 
           <fieldset className="daycare__form-section">
             <legend className="daycare__form-legend">
-              <Calendar /> Fechas y horario
+              <Calendar /> Horario
             </legend>
-
-            <div>
-              <div className="daycare__form-field">
-                <label htmlFor="startDate" className="daycare__label">
-                  Desde
-                </label>
-                <input
-                  type="date"
-                  id="startDate"
-                  name="startDate"
-                  className="daycare__input"
-                  required
-                />
-              </div>
-
-              <div className="daycare__form-field">
-                <label htmlFor="endDate" className="daycare__label">
-                  Hasta
-                </label>
-                <input
-                  type="date"
-                  id="endDate"
-                  name="endDate"
-                  className="daycare__input"
-                  required
-                />
-              </div>
-            </div>
 
             <div className="daycare__form-field">
               <label htmlFor="time" className="daycare__label">
@@ -217,6 +273,82 @@ export default function Reservations() {
               />
             </div>
           </fieldset>
+          {/* CALENDARIO */}
+          <FullCalendar
+            key={calendarRefresh}
+            dateClick={handleDateClick}
+
+            dayCellClassNames={(info) => {
+              const date = normalizeDate(info.date);
+
+              if (isInRange(date)) {
+                return ["selected-range"];
+              }
+
+              return [];
+            }}
+            plugins={[dayGridPlugin, interactionPlugin]}
+            initialView="dayGridMonth"
+            locale={esLocale}
+            dateClick={handleDateClick}
+
+            dayCellDidMount={(info) => {
+
+              const date = normalizeDate(info.date);
+              const count = getCount(date);
+              console.log(date, count);
+
+              if (selectedRange) {
+                if (
+                  date >= selectedRange.start &&
+                  date <= selectedRange.end
+                ) {
+                  info.el.style.border = "3px solid #2563eb";
+                  info.el.style.borderRadius = "8px";
+                }
+              }
+              // 🔴 ROJO (FULL)
+              if (count >= 3) {
+                info.el.style.backgroundColor = "#ff4d4d";
+                info.el.style.opacity = "0.6";
+              }
+
+              // 🟡 AMARILLO (HAY RESERVAS)
+              else if (count > 0) {
+                info.el.style.backgroundColor = "#ffd24d";
+              }
+
+              // 🟢 LIBRE
+              else {
+                info.el.style.backgroundColor = "#7dff7d";
+              }
+              const oldBadge = info.el.querySelector(".capacity-badge");
+              if (oldBadge) oldBadge.remove();
+              // 🔢 contador
+              info.el.style.position = "relative";
+
+              const badge = document.createElement("div");
+              badge.innerText = `${count}/3`;
+              badge.className = "capacity-badge";
+              info.el.appendChild(badge);
+            }}
+          />
+          {/* MENSAJE PRIMER CLICK */}
+          {rangeStart && (
+            <div>
+              Selecciona fecha de salida
+            </div>
+          )}
+
+          {/* RANGO SELECCIONADO */}
+          {selectedRange && (
+            <div>
+              📅 {selectedRange.start}
+              {selectedRange.start !== selectedRange.end && (
+                <> → {selectedRange.end}</>
+              )}
+            </div>
+          )}
 
           <div className="daycare__form-actions daycare__form-field">
             <button
@@ -227,8 +359,11 @@ export default function Reservations() {
               {isSubmitting ? "Enviando..." : "Enviar Reserva"}
             </button>
           </div>
+
         </form>
       </section>
+
+
     </>
   );
 }
