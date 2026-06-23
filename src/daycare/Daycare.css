@@ -1,46 +1,47 @@
 /* Tutorial */
 .welcome-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
 .welcome-modal {
-  background: white;
-  padding: 2rem;
-  border-radius: 20px;
-  max-width: 420px;
-  width: 90%;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .welcome-modal h2 {
-  margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 .welcome-modal p {
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
 }
 
 .welcome-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
 }
 
 .welcome-buttons button {
-  border: none;
-  border-radius: 10px;
-  padding: 0.8rem 1.2rem;
-  cursor: pointer;
-  font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    padding: 0.8rem 1.2rem;
+    cursor: pointer;
+    font-weight: 600;
 }
+
 /*  **Header** */
 .header {
     width: 100%;
@@ -264,7 +265,7 @@ input[type="file"]::file-selector-button:hover {
 }
 
 .selected-range {
-  background-color: rgb(255, 255, 255) !important;
+    background-color: rgb(255, 255, 255) !important;
 }
 
 .daycare__form-actions>button {
@@ -282,9 +283,11 @@ input[type="file"]::file-selector-button:hover {
 .daycare__form-actions>button:hover {
     background-color: var(--color-secondary);
 }
-.daycare__form-actions > .reservation-form__submit{
+
+.daycare__form-actions>.reservation-form__submit {
     margin-top: 1rem;
 }
+
 .daycare__form-field {
     margin-bottom: 1rem;
 }
@@ -303,138 +306,206 @@ input[type="file"]::file-selector-button:hover {
 
 /* Animación suave al pasar el mouse */
 .react-photo-album img {
-  border-radius: 12px;
-  transition: transform 0.3s ease;
-  cursor: pointer;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
 }
 
 .react-photo-album img:hover {
-  transform: scale(1.03);
+    transform: scale(1.03);
 }
+
 .react-photo-album img {
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 .react-photo-album img:hover {
-  transform: scale(1.03);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
 }
 
 .loading-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.65);
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  z-index: 9999;
+    z-index: 9999;
 }
 
 .loading-box {
-  width: min(90%, 350px);
-  background: white;
-  padding: 2rem;
-  border-radius: 20px;
-  text-align: center;
+    width: min(90%, 350px);
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
 }
 
 
 .loading-title {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .loading-message {
-  line-height: 1.5;
+    line-height: 1.5;
 }
 
 /*  CALENDARIO */
 .fc-toolbar-title {
-  font-size: 1.2rem !important;
-  font-weight: 600;
+    font-size: 1.2rem !important;
+    font-weight: 600;
 }
+
 .fc-button {
-  font-size: 12px !important;
-  padding: 4px 8px !important;
-  background-color: var(--color-primary) !important;
-  border: none !important;
+    font-size: 12px !important;
+    padding: 4px 8px !important;
+    background-color: var(--color-primary) !important;
+    border: none !important;
 }
 
 .fc-daygrid-day {
-  border: 1px solid var(--color-primary) !important;
-  transition: all 0.2s ease;
+    border: 1px solid var(--color-primary) !important;
+    transition: all 0.2s ease;
 }
+
 .fc-daygrid-day:hover {
-  background-color: var(--color-secondary) !important;
-  transform: scale(1.02);
-  cursor: pointer;
+    background-color: var(--color-secondary) !important;
+    transform: scale(1.02);
+    cursor: pointer;
 }
+
 .fc-daygrid-day:hover .fc-daygrid-day-number {
-  color: white !important;
+    color: white !important;
 }
+
 .capacity-badge {
-  color: black !important;
+    color: black !important;
 }
+
 .fc-col-header-cell {
-  background-color : var(--color-primary) !important;
-  border: none !important;
-  padding: 8px 0;
+    background-color: var(--color-primary) !important;
+    border: none !important;
+    padding: 8px 0;
 }
+
 .fc-col-header-cell-cushion {
-  font-size: 12px;
-  font-weight: 600;
-  color: white;
-  text-transform: capitalize;
-  letter-spacing: 0.5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
 }
-.capacity-badge{
+
+.capacity-badge {
     position: absolute;
-        top: 5px;
-        left: 5px;
-        background-color: white;
-        padding: 2px 6px;
-        border-radius: 8px;
-        font-size: 12px;
-        font-weight: bold;
-        z-index: 999;
+    top: 40px;
+    left: 5px;
+    background-color: white;
+    padding: 2px 6px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 999;
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+    to {
+        transform: rotate(360deg);
+    }
 }
+
 .success-message {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: #22c55e;
-  color: white;
-  padding: 14px 20px;
-  border-radius: 12px;
-  font-weight: 600;
-  z-index: 9999;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #22c55e;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    z-index: 9999;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
-.footer{
+
+.calendar-legend {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-family: var(--text-typography);
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
+
+.modal-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    width: min(90%, 400px);
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-box h3 {
+    color: #dc2626;
+    margin-bottom: 1rem;
+    font-family: var(--text-typography);
+}
+
+.modal-box p {
+    margin-bottom: 1.5rem;
+    font-family: var(--text-typography);
+}
+
+.modal-box button {
+    background: var(--color-primary);
+    font-family: var(--text-typography);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.footer {
     background-color: var(--color-primary);
     padding: 1rem;
     text-align: center;
 }
-.footer__title{
+
+.footer__title {
     font-family: var(--text-typography);
     font-size: 1.5rem;
     color: white;
     margin-bottom: 0.5rem;
 }
-.footer__text{
+
+.footer__text {
     font-size: 0.875rem;
-    color: white;  }
+    color: white;
+}
 
 
 /** TABLET */
@@ -503,6 +574,13 @@ input[type="file"]::file-selector-button:hover {
         width: auto;
         min-width: 220px;
     }
+
+    .calendar-legend {
+        justify-content: left;
+    }
+    .capacity-badge {
+    top: 5px;
+}
 }
 
 /** Laptop */

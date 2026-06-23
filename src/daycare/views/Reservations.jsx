@@ -18,6 +18,7 @@ export default function Reservations() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [calendarRefresh, setCalendarRefresh] = useState(0);
+  const [showNoCapacityModal, setShowNoCapacityModal] = useState(false);
 
   const { submitForm } = useSubmitForm();
 
@@ -65,7 +66,7 @@ export default function Reservations() {
     const clickedISO = normalizeDate(clickedDate);
 
     if ((capacity?.[clickedISO] || 0) >= 3) {
-      alert("No hay cupos para esa fecha");
+      setShowNoCapacityModal(true);
       return;
     }
 
@@ -162,7 +163,18 @@ export default function Reservations() {
   return (
     <>
       {isSubmitting && <LoadingOverlay />}
+      {showNoCapacityModal && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>🐶 Sin disponibilidad</h3>
+            <p>Lo sentimos, ese día ya no tiene cupos disponibles.</p>
 
+            <button onClick={() => setShowNoCapacityModal(false)}>
+              Entendido
+            </button>
+          </div>
+        </div>
+      )}
       {submitSuccess && (
         <div className="success-message">
           ✅ Reserva enviada correctamente
@@ -333,6 +345,11 @@ export default function Reservations() {
               info.el.appendChild(badge);
             }}
           />
+          <div class="calendar-legend">
+            <span class="legend-item">🟢 Disponible</span>
+            <span class="legend-item">🟡 Cupos limitados</span>
+            <span class="legend-item">🔴 Completo</span>
+          </div>
           {/* MENSAJE PRIMER CLICK */}
           {rangeStart && (
             <div>
